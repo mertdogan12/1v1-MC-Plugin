@@ -1,0 +1,127 @@
+Soup:
+  lenght: 36
+  '0':
+    ==: org.bukkit.inventory.ItemStack
+    type: IRON_SWORD
+  '1':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '2':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '3':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '4':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '5':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '6':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '7':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '8':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '9':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '10':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '11':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '12':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '13':
+    ==: org.bukkit.inventory.ItemStack
+    type: BOWL
+    amount: 64
+  '14':
+    ==: org.bukkit.inventory.ItemStack
+    type: BROWN_MUSHROOM
+    amount: 64
+  '15':
+    ==: org.bukkit.inventory.ItemStack
+    type: RED_MUSHROOM
+    amount: 64
+  '16':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '17':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '18':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '19':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '20':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '21':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '22':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '23':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '24':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '25':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '26':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '27':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '28':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '29':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '30':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '31':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '32':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '33':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '34':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  '35':
+    ==: org.bukkit.inventory.ItemStack
+    type: MUSHROOM_SOUP
+  armor:
+    lenght: 4
+    '0':
+      ==: org.bukkit.inventory.ItemStack
+      type: IRON_BOOTS
+    '1':
+      ==: org.bukkit.inventory.ItemStack
+      type: IRON_LEGGINGS
+    '2':
+      ==: org.bukkit.inventory.ItemStack
+      type: IRON_CHESTPLATE
+    '3':
+      ==: org.bukkit.inventory.ItemStack
+      type: IRON_HELMET

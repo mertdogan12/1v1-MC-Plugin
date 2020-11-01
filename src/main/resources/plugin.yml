@@ -1,0 +1,19 @@
+main: de.mert.main.OneVOne
+name: 1v1
+version: 1.9
+author: Mert Dogan
+commands:
+  tpw:
+    description: Teleports you to an other world
+  gm:
+    description: Changes you Gamemode.
+  kit:
+    description: Can change Kits
+  unload:
+    description: Unload a world
+  elo:
+    description: Change the Elo
+  c:
+    description: Matchmaking request to a other Player
+  changeWeather:
+    description: Changes whether you can change the weather

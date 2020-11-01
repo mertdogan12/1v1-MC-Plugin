@@ -1,0 +1,142 @@
+uhc:
+  lenght: 36
+  '0':
+    ==: org.bukkit.inventory.ItemStack
+    type: GOLDEN_APPLE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: "\xa76UHC"
+  '1':
+    ==: org.bukkit.inventory.ItemStack
+    type: GOLDEN_APPLE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: "\xa76Soup"
+  '7':
+    ==: org.bukkit.inventory.ItemStack
+    type: ENDER_PEARL
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: "\xa7cUnranked"
+  '8':
+    ==: org.bukkit.inventory.ItemStack
+    type: REDSTONE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: "\xa76Elosettings (Matchmaking)"
+  armor:
+    lenght: 4
+    '0':
+      ==: org.bukkit.inventory.ItemStack
+      type: AIR
+      damage: -1
+      amount: 0
+    '1':
+      ==: org.bukkit.inventory.ItemStack
+      type: AIR
+      damage: -1
+      amount: 0
+    '2':
+      ==: org.bukkit.inventory.ItemStack
+      type: AIR
+      damage: -1
+      amount: 0
+    '3':
+      ==: org.bukkit.inventory.ItemStack
+      type: AIR
+      damage: -1
+      amount: 0
+UHC:
+  lenght: 36
+  '0':
+    ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      enchants:
+        DAMAGE_ALL: 4
+  '1':
+    ==: org.bukkit.inventory.ItemStack
+    type: LAVA_BUCKET
+  '7':
+    ==: org.bukkit.inventory.ItemStack
+    type: COBBLESTONE
+    amount: 64
+  '8':
+    ==: org.bukkit.inventory.ItemStack
+    type: FISHING_ROD
+  armor:
+    lenght: 4
+    '0':
+      ==: org.bukkit.inventory.ItemStack
+      type: DIAMOND_BOOTS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 3
+    '1':
+      ==: org.bukkit.inventory.ItemStack
+      type: DIAMOND_LEGGINGS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 3
+    '2':
+      ==: org.bukkit.inventory.ItemStack
+      type: DIAMOND_CHESTPLATE
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 3
+    '3':
+      ==: org.bukkit.inventory.ItemStack
+      type: DIAMOND_HELMET
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        enchants:
+          PROTECTION_ENVIRONMENTAL: 3
+  '2':
+    ==: org.bukkit.inventory.ItemStack
+    type: BOW
+  '3':
+    ==: org.bukkit.inventory.ItemStack
+    type: COOKED_BEEF
+    amount: 64
+  '4':
+    ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_PICKAXE
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      enchants:
+        DIG_SPEED: 5
+  '5':
+    ==: org.bukkit.inventory.ItemStack
+    type: GOLDEN_APPLE
+    amount: 5
+  '6':
+    ==: org.bukkit.inventory.ItemStack
+    type: WATER_BUCKET
+  '9':
+    ==: org.bukkit.inventory.ItemStack
+    type: ARROW
+    amount: 16
+  '10':
+    ==: org.bukkit.inventory.ItemStack
+    type: COBBLESTONE
+    amount: 64
+  '12':
+    ==: org.bukkit.inventory.ItemStack
+    type: WATER_BUCKET
+  '13':
+    ==: org.bukkit.inventory.ItemStack
+    type: LAVA_BUCKET
