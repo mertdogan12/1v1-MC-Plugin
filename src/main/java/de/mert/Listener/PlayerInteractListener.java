@@ -169,15 +169,15 @@ public class PlayerInteractListener implements Listener {
         for (int i = 0; i <= 4; i++) {
             String name = String.valueOf(i);
             File f = new File(name);
-            if (f.exists()) {
+         //   if (f.exists()) {
                 if (Bukkit.getWorld(name) == null) Bukkit.createWorld(WorldCreator.name(name));
                 w = Bukkit.getWorld(name);
                 if (w.getPlayers().size() == 0) {
                     i = 4;
                 } else
                     w = null;
-            } else
-                ccs.sendMessage(pr+"The world "+ name +" does not exist");
+            //} else
+            //    ccs.sendMessage(pr+"The world "+ name +" does not exist");
         }
 
         // If no world is found, gymnastics takes place
