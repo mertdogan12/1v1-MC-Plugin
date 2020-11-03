@@ -50,22 +50,29 @@ public class MysqlPlayer {
 
         if (db.isSet("pw")) {
             password = db.getString("pw");
-        }
+        } else db.set("pw", password);
 
         if (db.isSet("port")) {
             port = db.getInt("port");
-        }
+        } else db.set("port", port);
 
         if (db.isSet("ip")) {
             host = db.getString("ip");
-        }
+        } else db.set("ip", host);
 
         if (db.isSet("database")) {
             database = db.getString("database");
-        }
+        } else db.set("database", database);
 
         if (db.isSet("user")) {
             username = db.getString("user");
+        } else db.set("user", username);
+
+        try {
+            db.save(pwF);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
         }
 
         try {
@@ -76,11 +83,60 @@ public class MysqlPlayer {
             s.sendMessage(pr+"§cNot Connected to Mysql database");
         }
 
+        //Gets the Tabels
+        List<String> tabels = new ArrayList<>();
+        try {
+            DatabaseMetaData metaData = connection.getMetaData();
+            ResultSet resultSet = metaData.getTables(null, null, "%",  null);
+
+            while (resultSet.next()) {
+                tabels.add(resultSet.getString(3));
+            }
+        } catch (SQLException e) {
+            p.sendMessage(pr+"§cError by Tabels");
+            s.sendMessage(pr+"§cError by Tabels");
+            e.printStackTrace();
+        }
+
+        //Inserts the elo
+        if (!tabels.contains("elo")) {
+            try {
+                statement.executeUpdate("CREATE TABLE `elo` ("+
+                        "  `uuid` VARCHAR(255) NOT NULL," +
+                        "  `Soup` INT NOT NULL," +
+                        "  `UHC` INT NOT NULL," +
+                        "  PRIMARY KEY (`uuid`));");
+            } catch (SQLException e) {
+                p.sendMessage(pr+"§cError when connecting to the Mysql database");
+                s.sendMessage(pr+"Error by creating the table elo");
+                e.printStackTrace();
+                return;
+            }
+        }
+
         if (getElo("UHC") == null) {
             try {
                 statement.executeUpdate("INSERT INTO elo (uuid, Soup, UHC) VALUES ('"+p.getUniqueId().toString()+"', 100, 100)");
             } catch (Exception ex) {
                 p.sendMessage(pr+"§cError loading the Elo");
+                s.sendMessage(pr+"§cError loading the Elo");
+                ex.printStackTrace();
+                return;
+            }
+        }
+
+        //Inserts the name
+        if (!tabels.contains("name")) {
+            try {
+                statement.executeUpdate("CREATE TABLE name (" +
+                        "  `uuid` VARCHAR(255) NOT NULL," +
+                        "  `ign` VARCHAR(255) NOT NULL," +
+                        "  `firstLogin` DATE NOT NULL," +
+                        "  PRIMARY KEY (`uuid`))");
+            } catch (SQLException e) {
+                p.sendMessage(pr+"§cError by creating the table name");
+                s.sendMessage(pr+"§cError by creating the table name");
+                e.printStackTrace();
                 return;
             }
         }
@@ -92,7 +148,8 @@ public class MysqlPlayer {
                 statement.executeUpdate("INSERT INTO name (uuid, ign, firstLogin) VALUES ('"+p.getUniqueId().toString()+"', '"+p.getName()+"', '"+formatter.format(date)+"')");
             } catch (Exception ex1) {
                 s.sendMessage(pr+"§cError when inserting the name");
-                p.sendMessage(pr+"§cError when connecting to the Mysql database");
+                p.sendMessage(pr+"§cError when inserting the name");
+                ex1.printStackTrace();
                 return;
             }
         }
@@ -103,7 +160,25 @@ public class MysqlPlayer {
             } catch (SQLException throwables) {
                 s.sendMessage(pr+"§cError updating the name");
                 throwables.printStackTrace();
-                p.sendMessage(pr+"§cError when connecting to the Mysql database");
+                p.sendMessage(pr+"§cError updating the name");
+                return;
+            }
+        }
+
+        //Inserts the Settings
+        if (!tabels.contains("player")) {
+            try {
+                statement.executeUpdate("CREATE TABLE player (" +
+                        "  `uuid` VARCHAR(255) NOT NULL," +
+                        "  `kills` INT NULL," +
+                        "  `death` INT NULL," +
+                        "  `settings_maxElo` INT NOT NULL," +
+                        "  `settings_minElo` INT NOT NULL," +
+                        "  PRIMARY KEY (`uuid`))");
+            } catch (SQLException e) {
+                p.sendMessage(pr+"§cError by creating the table player");
+                s.sendMessage(pr+"§cError by creating the table player");
+                e.printStackTrace();
                 return;
             }
         }
@@ -114,11 +189,12 @@ public class MysqlPlayer {
             } catch (SQLException throwables) {
                 s.sendMessage(pr+"§cError updating the settings");
                 throwables.printStackTrace();
-                p.sendMessage(pr+"§cError when connecting to the Mysql database");
+                p.sendMessage(pr+"§cError updating the settings");
                 return;
             }
         }
 
+        //Gets the Elo
         elo.put("Soup", getElo("Soup"));
         elo.put("UHC", getElo("UHC"));
         elo.put("All", getElo("Soup") + getElo("UHC"));

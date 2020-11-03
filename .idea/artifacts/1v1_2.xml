@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="1v1">
-    <output-path>$PROJECT_DIR$/Spigot/plugins</output-path>
-    <root id="archive" name="1v1 to server.jar">
+  <artifact type="jar" name="1v1.2">
+    <output-path>$USER_HOME$/Desktop/1v1-MC-Plugin/Spigot/plugins</output-path>
+    <root id="archive" name="1v1.2.jar">
       <element id="module-output" name="1v1" />
       <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
     </root>
