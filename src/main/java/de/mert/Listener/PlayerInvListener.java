@@ -1,5 +1,6 @@
 package de.mert.Listener;
 
+import de.mert.main.OneVOne;
 import de.mert.vars.Funktions;
 import de.mert.vars.MysqlPlayer;
 import org.bukkit.Bukkit;
@@ -28,16 +29,25 @@ public class PlayerInvListener implements Listener {
                 if (e.getItem().hasItemMeta()) {
                     if (e.getItem().getItemMeta().hasDisplayName()) {
                         e.setCancelled(true);
+                        
+                        String displayName = e.getItem().getItemMeta().getDisplayName();
+                        switch (displayName) {
+                            case "§6Ranked", "§cUnranked", "§6Elosettings (Matchmaking)":
+                                if (!PlayerJoinListener.rankedMod) {
+                                    p.sendMessage(OneVOne.prefix+"§cRanked Mode is disabled");
+                                    return;
+                                }
+                        }
 
                         //Ranked_Settings
-                        if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6Ranked")) {
+                        if (displayName.equalsIgnoreCase("§6Ranked")) {
                             p.getInventory().setItem(7, itembuilder(new ItemStack(Material.ENDER_PEARL), "§cUnranked", false));
                             PlayerInteractListener.modRanked.put(p.getUniqueId().toString(), false);
-                        } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cUnranked")) {
+                        } else if (displayName.equalsIgnoreCase("§cUnranked")) {
                             p.getInventory().setItem(7, itembuilder(new ItemStack(Material.ENDER_PEARL), "§6Ranked", true));
                             PlayerInteractListener.modRanked.put(p.getUniqueId().toString(), true);
 
-                        } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6Elosettings (Matchmaking)")) {
+                        } else if (displayName.equalsIgnoreCase("§6Elosettings (Matchmaking)")) {
                             //Settings
                             Inventory i = Bukkit.createInventory(null, 9, "§6Elobereich des Gegners");
 

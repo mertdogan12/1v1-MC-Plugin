@@ -1,5 +1,6 @@
 package de.mert.vars;
 
+import de.mert.Listener.PlayerJoinListener;
 import de.mert.main.OneVOne;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
@@ -29,6 +30,8 @@ public class MysqlPlayer {
 
     public MysqlPlayer(Player p) {
         this.p = p;
+
+        if (!PlayerJoinListener.rankedMod) return;
 
         //Connect to Mysql Database
         File pwF = new File("plugins/1v1/db.yml");
@@ -98,31 +101,46 @@ public class MysqlPlayer {
             e.printStackTrace();
         }
 
-        //Inserts the elo
-        if (!tabels.contains("elo")) {
-            try {
-                statement.executeUpdate("CREATE TABLE `elo` ("+
-                        "  `uuid` VARCHAR(255) NOT NULL," +
-                        "  `Soup` INT NOT NULL," +
-                        "  `UHC` INT NOT NULL," +
-                        "  PRIMARY KEY (`uuid`));");
-            } catch (SQLException e) {
-                p.sendMessage(pr+"§cError when connecting to the Mysql database");
-                s.sendMessage(pr+"Error by creating the table elo");
-                e.printStackTrace();
-                return;
-            }
-        }
+        File f = new File("plugins/kits");
+        File[] list = f.listFiles();
+        for (File n:
+                list) {
+            String kit = n.getName();
+            File file = new File(n+"/"+kit+".yml");
+            if (!file.exists()) continue;
 
-        if (getElo("UHC") == null) {
-            try {
-                statement.executeUpdate("INSERT INTO elo (uuid, Soup, UHC) VALUES ('"+p.getUniqueId().toString()+"', 100, 100)");
-            } catch (Exception ex) {
-                p.sendMessage(pr+"§cError loading the Elo");
-                s.sendMessage(pr+"§cError loading the Elo");
-                ex.printStackTrace();
-                return;
+            if (!tabels.contains(kit)) {
+                try {
+                    statement.executeUpdate("CREATE TABLE `"+kit+"` (" +
+                            " `uuid` VARCHAR(255) NOT NULL," +
+                            " `elo` INT NOT NULL," +
+                            "PRIMARY KEY (`uuid`));");
+                } catch (SQLException e) {
+                    p.sendMessage(pr+"§cError by creating the table elo");
+                    s.sendMessage(pr+"§cError by creating the table elo");
+                    e.printStackTrace();
+                    return;
+                }
             }
+
+            if (getElo(kit) == null) {
+                try {
+                    statement.executeUpdate("INSERT INTO "+kit+" (uuid, elo) VALUES ('"+p.getUniqueId().toString()+"', 100)");
+                } catch (Exception ex) {
+                    p.sendMessage(pr+"§cError loading the Elo");
+                    s.sendMessage(pr+"§cError loading the Elo");
+                    ex.printStackTrace();
+                    return;
+                }
+            }
+
+            elo.put(kit, getElo(kit));
+
+            if (!elo.containsKey("All")) {
+                elo.put("All", getElo(kit));
+            } else
+                elo.replace("All", elo.get("All")+getElo(kit));
+
         }
 
         //Inserts the name
@@ -194,10 +212,6 @@ public class MysqlPlayer {
             }
         }
 
-        //Gets the Elo
-        elo.put("Soup", getElo("Soup"));
-        elo.put("UHC", getElo("UHC"));
-        elo.put("All", getElo("Soup") + getElo("UHC"));
         mmElo = getEloSettings();
 
         try {
@@ -279,8 +293,7 @@ public class MysqlPlayer {
             */
             mmelo[0] = l.get(0);
             mmelo[1] = l.get(1);
-        } catch (Exception ex) {
-            this.s.sendMessage(OneVOne.prefix+"Error in Funktion bei ändern der Settings");
+        } catch (SQLException ex) {
             return null;
         }
 
@@ -291,14 +304,13 @@ public class MysqlPlayer {
 
     private Integer getElo(String kit) {
         try {
-            ResultSet result = statement.executeQuery("SELECT * FROM elo WHERE uuid = '"+p.getUniqueId().toString()+"';");
+            ResultSet result = statement.executeQuery("SELECT * FROM "+kit+" WHERE uuid = '"+p.getUniqueId().toString()+"';");
             List<Integer> l = new ArrayList<>();
             while (result.next()) {
-                l.add(result.getInt(kit));
+                l.add(result.getInt("elo"));
             }
             return l.get(0);
         } catch (Exception ex) {
-            s.sendMessage("Error in the funktion getMysql |  elo | "+kit);
             return null;
         }
     }
@@ -312,8 +324,6 @@ public class MysqlPlayer {
             }
             return l.get(0);
         } catch (Exception ex) {
-            s.sendMessage(pr+"§cError in the funktion getName");
-            ex.printStackTrace();
             return null;
         }
     }

@@ -11,14 +11,13 @@ import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
 
-import static de.mert.vars.Funktions.deleteFile;
 import static de.mert.vars.Funktions.itembuilder;
 
 
 public class SettingsListener implements Listener {
 
     @EventHandler
-    private void on(InventoryClickEvent e) throws SQLException {
+    private void on(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         MysqlPlayer mysqlPlayer = new MysqlPlayer(p);
         if (e.getClickedInventory() != null &&

@@ -20,8 +20,16 @@ public class Funktions {
     public static Inventory getLobbyKit(boolean modRanked) {
         Inventory i = Bukkit.createInventory(null, 9*4);
 
-        i.addItem(itembuilder(new ItemStack(Material.GOLDEN_APPLE), "§6UHC", false));
-        i.addItem(itembuilder(new ItemStack(Material.MUSHROOM_SOUP), "§6Soup", false));
+        File f = new File("plugins/kits");
+        File[] list = f.listFiles();
+        for (File n:
+                list) {
+            String kit = n.getName();
+            File file = new File(n+"/"+kit+".yml");
+            if (!file.exists()) continue;
+
+            i.addItem(itembuilder(new ItemStack(Material.DIAMOND), "§6"+kit, false));
+        }
         i.setItem(8, itembuilder(new ItemStack(Material.REDSTONE), "§6Elosettings (Matchmaking)", false));
         if (modRanked) {
             i.setItem(7, itembuilder(new ItemStack(Material.ENDER_PEARL), "§6Ranked", true));

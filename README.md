@@ -7,8 +7,9 @@ If you have a Minecraft Server:
 
 If you have no Mincraft Server:
 1. Start the [start.bat](Spigot/start.bat)
-
-**At the moment you can't add new Kits.**
+2. After the start edit the [db.yml](Spigot/plugins/1v1/db.yml) and restart the server.
+ 
+ **You need a mysql database to use the ranked Mode**
 
 ## Permissions
 * "1v1.build.changeWeather"

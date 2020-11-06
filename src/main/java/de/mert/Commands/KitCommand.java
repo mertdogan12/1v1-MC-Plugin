@@ -1,5 +1,6 @@
 package de.mert.Commands;
 
+import de.mert.vars.Funktions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -55,6 +56,10 @@ public class KitCommand implements CommandExecutor {
                                 e.printStackTrace();
                                 p.sendMessage(pr+"§cError");
                                 return false;
+                            }
+                            for (Player p1:
+                                 p.getWorld().getPlayers()) {
+                                p1.getInventory().addItem(Funktions.itembuilder(new ItemStack(Material.DIAMOND), "§6"+args[1], false));
                             }
                             p.sendMessage(pr+"The Kit §6"+args[1]+" is set");
                             break;

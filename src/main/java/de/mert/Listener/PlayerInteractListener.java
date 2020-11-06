@@ -33,13 +33,13 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     private void on(PlayerInteractEvent e) throws IOException {
         final Player p = e.getPlayer();
-        MysqlPlayer mysqlPlayer = new MysqlPlayer(p);
         String kit;
         String pr = OneVOne.prefix;
         if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_AIR) {
             if (e.getItem() != null && e.getItem().hasItemMeta()) {
                 if (e.getItem().getItemMeta().hasDisplayName()) {
                     e.setCancelled(true);
+                    MysqlPlayer mysqlPlayer = new MysqlPlayer(p);
 
                     //Get the name from the kit
                     kit = e.getItem().getItemMeta().getDisplayName().replace("§6", "");
