@@ -4,6 +4,7 @@ import de.mert.main.OneVOne;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -27,8 +28,12 @@ public class Funktions {
             String kit = n.getName();
             File file = new File(n+"/"+kit+".yml");
             if (!file.exists()) continue;
+            YamlConfiguration c = YamlConfiguration.loadConfiguration(file);
+            Material m = Material.DIAMOND;
 
-            i.addItem(itembuilder(new ItemStack(Material.DIAMOND), "§6"+kit, false));
+            if (c.isSet("Material")) m = Material.valueOf(c.getString("Material"));
+
+            i.addItem(itembuilder(new ItemStack(m), "§6"+kit, false));
         }
         i.setItem(8, itembuilder(new ItemStack(Material.REDSTONE), "§6Elosettings (Matchmaking)", false));
         if (modRanked) {
