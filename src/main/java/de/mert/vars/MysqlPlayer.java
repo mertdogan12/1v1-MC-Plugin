@@ -231,7 +231,7 @@ public class MysqlPlayer {
         }
 
         try {
-            statement.executeUpdate("UPDATE elo SET "+kit+" = "+elo+" WHERE uuid = '"+p.getUniqueId().toString()+"'");
+            statement.executeUpdate("UPDATE "+kit+" SET elo = "+elo+" WHERE uuid = '"+p.getUniqueId().toString()+"'");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
