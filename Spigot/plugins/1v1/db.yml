@@ -1,5 +1,5 @@
 pw: PASSWORD
 port: 3306
 ip: localhost
-user: user
+user: mert
 database: minecraft
