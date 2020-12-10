@@ -21,10 +21,16 @@ public class Funktions {
     public static Inventory getLobbyKit(boolean modRanked) {
         Inventory i = Bukkit.createInventory(null, 9*4);
 
+        i.setItem(8, itembuilder(new ItemStack(Material.REDSTONE), "§6Elosettings (Matchmaking)", false));
+        if (modRanked) {
+            i.setItem(7, itembuilder(new ItemStack(Material.ENDER_PEARL), "§6Ranked", true));
+        } else
+            i.setItem(7, itembuilder(new ItemStack(Material.ENDER_PEARL), "§cUnranked", false));
 
         File f = new File("plugins/kits");
+        if (!f.exists()) return i;
         File[] list = f.listFiles();
-        if (f.exists() && list != null) {
+        if (list == null) return i;
             for (File n:
                     list) {
 
@@ -38,13 +44,6 @@ public class Funktions {
 
                 i.addItem(itembuilder(new ItemStack(m), "§6"+kit, false));
             }
-        }
-        i.setItem(8, itembuilder(new ItemStack(Material.REDSTONE), "§6Elosettings (Matchmaking)", false));
-        if (modRanked) {
-            i.setItem(7, itembuilder(new ItemStack(Material.ENDER_PEARL), "§6Ranked", true));
-        } else
-            i.setItem(7, itembuilder(new ItemStack(Material.ENDER_PEARL), "§cUnranked", false));
-
         return i;
     }
 
