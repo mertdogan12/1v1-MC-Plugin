@@ -101,6 +101,7 @@ public class MysqlPlayer {
             e.printStackTrace();
         }
 
+        elo.put("All", 0);
         File f = new File("plugins/kits");
         if (f.exists() ) {
             File[] list = f.listFiles();
@@ -137,11 +138,7 @@ public class MysqlPlayer {
                     }
 
                     elo.put(kit, getElo(kit));
-
-                    if (!elo.containsKey("All")) {
-                        elo.put("All", getElo(kit));
-                    } else
-                        elo.replace("All", elo.get("All")+getElo(kit));
+                    elo.replace("All", elo.get("All")+getElo(kit));
 
                 }
             }
