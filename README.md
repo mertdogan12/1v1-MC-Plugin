@@ -1,15 +1,6 @@
 # Readme
 ## Usage
-If you have a Minecraft Server: 
-1. Copy the [Plugin](Spigot/plugins/1v1.jar) and the [Kits Folder](Spigot/plugins/kits) into your plugin folder.
-2. Copy the [Standard_Map](Spigot/Standard_Map) into your root folder of you server.
-3. After the start edit the [db.yml](Spigot/plugins/1v1/db.yml) and restart the server.
-
-If you have no Mincraft Server:
-1. Start the [start.bat](Spigot/start.bat)
-2. After the start edit the [db.yml](Spigot/plugins/1v1/db.yml) and restart the server.
- 
- **You need a mysql database to use the ranked Mode**
+[Installation Application](https://google.com)
 
 ## Permissions
 * "1v1.build.changeWeather"

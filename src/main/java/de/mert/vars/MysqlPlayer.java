@@ -102,46 +102,51 @@ public class MysqlPlayer {
         }
 
         File f = new File("plugins/kits");
-        File[] list = f.listFiles();
-        for (File n:
-                list) {
-            String kit = n.getName();
-            File file = new File(n+"/"+kit+".yml");
-            if (!file.exists()) continue;
+        if (f.exists() ) {
+            File[] list = f.listFiles();
+            if (list != null) {
+                for (File n:
+                        list) {
+                    String kit = n.getName();
+                    File file = new File(n+"/"+kit+".yml");
+                    if (!file.exists()) continue;
 
-            if (!tabels.contains(kit)) {
-                try {
-                    statement.executeUpdate("CREATE TABLE `"+kit+"` (" +
-                            " `uuid` VARCHAR(255) NOT NULL," +
-                            " `elo` INT NOT NULL," +
-                            "PRIMARY KEY (`uuid`));");
-                } catch (SQLException e) {
-                    p.sendMessage(pr+"§cError by creating the table elo");
-                    s.sendMessage(pr+"§cError by creating the table elo");
-                    e.printStackTrace();
-                    return;
+                    if (!tabels.contains(kit)) {
+                        try {
+                            statement.executeUpdate("CREATE TABLE `"+kit+"` (" +
+                                    " `uuid` VARCHAR(255) NOT NULL," +
+                                    " `elo` INT NOT NULL," +
+                                    "PRIMARY KEY (`uuid`));");
+                        } catch (SQLException e) {
+                            p.sendMessage(pr+"§cError by creating the table elo");
+                            s.sendMessage(pr+"§cError by creating the table elo");
+                            e.printStackTrace();
+                            return;
+                        }
+                    }
+
+                    if (getElo(kit) == null) {
+                        try {
+                            statement.executeUpdate("INSERT INTO "+kit+" (uuid, elo) VALUES ('"+p.getUniqueId().toString()+"', 100)");
+                        } catch (Exception ex) {
+                            p.sendMessage(pr+"§cError loading the Elo");
+                            s.sendMessage(pr+"§cError loading the Elo");
+                            ex.printStackTrace();
+                            return;
+                        }
+                    }
+
+                    elo.put(kit, getElo(kit));
+
+                    if (!elo.containsKey("All")) {
+                        elo.put("All", getElo(kit));
+                    } else
+                        elo.replace("All", elo.get("All")+getElo(kit));
+
                 }
             }
-
-            if (getElo(kit) == null) {
-                try {
-                    statement.executeUpdate("INSERT INTO "+kit+" (uuid, elo) VALUES ('"+p.getUniqueId().toString()+"', 100)");
-                } catch (Exception ex) {
-                    p.sendMessage(pr+"§cError loading the Elo");
-                    s.sendMessage(pr+"§cError loading the Elo");
-                    ex.printStackTrace();
-                    return;
-                }
-            }
-
-            elo.put(kit, getElo(kit));
-
-            if (!elo.containsKey("All")) {
-                elo.put("All", getElo(kit));
-            } else
-                elo.replace("All", elo.get("All")+getElo(kit));
-
         }
+
 
         //Inserts the name
         if (!tabels.contains("name")) {
