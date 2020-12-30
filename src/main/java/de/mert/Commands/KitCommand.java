@@ -24,7 +24,19 @@ public class KitCommand implements CommandExecutor {
         if (s instanceof Player) {
             Player p = (Player) s;
             if (p.hasPermission("1v1.changeKit")) {
-                if (args.length == 2) {
+                if (args.length == 2 || args.length == 3) {
+                    Material m = Material.DIAMOND;
+
+                    //Gets the Material
+                    if (args.length == 3) {
+                        try {
+                            m = Material.valueOf(args[2]);
+                        } catch (Exception e) {
+                            p.sendMessage(pr + "Material not exist");
+                            return false;
+                        }
+                    }
+
                     switch (args[0]) {
                         //Shows the Kit
                         case "get":
@@ -51,7 +63,7 @@ public class KitCommand implements CommandExecutor {
                         //save's your Inventory as a kit
                         case "set":
                             try {
-                                saveInv(args[1], p.getInventory().getContents(), p.getInventory().getArmorContents());
+                                saveInv(args[1], p.getInventory().getContents(), p.getInventory().getArmorContents(), m);
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 p.sendMessage(pr+"§cError");
@@ -65,18 +77,18 @@ public class KitCommand implements CommandExecutor {
                             break;
 
                         default:
-                            p.sendMessage(pr+"§cPlease use §4/kit [get/set] <name>");
+                            p.sendMessage(pr+"§cPlease use §4/kit [get/set/getInv] <name> <material>");
                             break;
                     }
                 } else
-                    p.sendMessage(pr+"§cPlease use §4/kit [get/set] <name>");
+                    p.sendMessage(pr+"§cPlease use §4/kit [get/set/getInv] <name> <material>");
             } else
                 p.sendMessage(pr+"§cNo permissions to perform this command");
         }
         return false;
     }
     
-    public static void saveInv(String name, ItemStack[] contents, ItemStack[] armor) throws IOException {
+    public static void saveInv(String name, ItemStack[] contents, ItemStack[] armor, Material m) throws IOException {
         File f = new File("plugins/kits/"+name+"/"+name+".yml");
         if (!f.exists()) {
             File folder = f.getParentFile();
@@ -84,6 +96,8 @@ public class KitCommand implements CommandExecutor {
             f.createNewFile();
         }
         YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
+
+        c.set("Material", m.getData().getName());
 
         c.set(name+".lenght", contents.length);
 
