@@ -40,26 +40,6 @@ public class PlayerJoinListener implements Listener {
         File f = new File("plugins/1v1/conf.yml");
         YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
 
-        if (!f.exists()) {
-            f.getParentFile().mkdirs();
-            try {
-                f.createNewFile();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                return;
-            }
-        }
-
-        if (!c.isSet("ranked")) {
-            c.set("ranked", rankedMod);
-            try {
-                c.save(f);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        } else
-            rankedMod = c.getBoolean("ranked");
-
         // Sets the scoreboard
         updateScoreboard(p);
         e.setJoinMessage("");
