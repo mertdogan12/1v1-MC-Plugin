@@ -83,7 +83,9 @@ public class MysqlPlayer {
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
-            s.sendMessage(pr+"§cNot Connected to Mysql database");
+            s.sendMessage(pr+"§cNot Connected to Mysql database " +
+                    "\nPlease edit the §1plugins/1v1/db.yml");
+            return;
         }
 
         //Gets the Tabels
@@ -228,7 +230,8 @@ public class MysqlPlayer {
             openConnection();
             statement = connection.createStatement();
         } catch (Exception e) {
-            e.printStackTrace();
+            s.sendMessage(pr+"§cNot Connected to Mysql database " +
+                    "\nPlease edit the §1plugins/1v1/db.yml");
             return false;
         }
 
@@ -253,7 +256,8 @@ public class MysqlPlayer {
             openConnection();
             statement = connection.createStatement();
         } catch (Exception e) {
-            e.printStackTrace();
+            this.s.sendMessage(pr+"§cNot Connected to Mysql database " +
+                    "\nPlease edit the §1plugins/1v1/db.yml");
             return false;
         }
 
@@ -296,6 +300,8 @@ public class MysqlPlayer {
             mmelo[0] = l.get(0);
             mmelo[1] = l.get(1);
         } catch (SQLException ex) {
+            s.sendMessage(pr+"§cNot Connected to Mysql database " +
+                    "\nPlease edit the §1plugins/1v1/db.yml");
             return null;
         }
 
@@ -313,6 +319,8 @@ public class MysqlPlayer {
             }
             return l.get(0);
         } catch (Exception ex) {
+            s.sendMessage(pr+"§cNot Connected to Mysql database " +
+                    "\nPlease edit the §1plugins/1v1/db.yml");
             return null;
         }
     }
@@ -326,6 +334,8 @@ public class MysqlPlayer {
             }
             return l.get(0);
         } catch (Exception ex) {
+            s.sendMessage(pr+"§cNot Connected to Mysql database " +
+                    "\nPlease edit the §1plugins/1v1/db.yml");
             return null;
         }
     }

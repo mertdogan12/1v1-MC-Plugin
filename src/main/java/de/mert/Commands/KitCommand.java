@@ -97,7 +97,7 @@ public class KitCommand implements CommandExecutor {
         }
         YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
 
-        c.set("Material", m.getData().getName());
+        c.set("Material", m.toString());
 
         c.set(name+".lenght", contents.length);
 
