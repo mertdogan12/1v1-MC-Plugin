@@ -1,6 +1,6 @@
 # Readme
 ## Usage
-[Installation Application](https://google.com)
+
 
 ## Permissions
 * "1v1.build.changeWeather"
