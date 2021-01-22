@@ -299,7 +299,7 @@ public class MysqlPlayer {
             */
             mmelo[0] = l.get(0);
             mmelo[1] = l.get(1);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             s.sendMessage(pr+"§cNot Connected to Mysql database " +
                     "\nPlease edit the §1plugins/1v1/db.yml");
             return null;
