@@ -21,6 +21,3 @@
     * Player Inventory clickt doesn't canceld.
 * "1v1.build.breakBlock" 
     * Player can drop items.
-    
-## Errors
-Plugin download alway the world Files.
