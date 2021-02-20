@@ -42,16 +42,14 @@ public class Github {
         }
     }
 
-
-
     public void downloadFiles(String path) throws IOException {
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject o = (JSONObject) jsonArray.get(i);
 
             if (!o.get("type").equals("file")) {
-                Github gitHub = new Github(this.path + "/" + o.get("name"));
+                Github gitHub = new Github(this.path + o.get("name"));
 
-                File f = new File(path + "/" + o.get("name"));
+                File f = new File(path + o.get("name"));
                 if (path.equals("")) f = new File((String) o.get("name"));
 
                 f.mkdirs();
@@ -61,11 +59,11 @@ public class Github {
                 URL website = new URL((String) o.get("download_url"));
 
                 try (InputStream in = website.openStream()) {
-                    Path target = Paths.get(path + "/" + o.get("name"));
+                    Path target = Paths.get(path + o.get("name"));
                     if (path.equals("")) target = Paths.get((String) o.get("name"));
 
                     Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
-                    System.out.println(website.toString() + " --> " + path + "/" + o.get("name"));
+                    System.out.println(website.toString() + " --> " + path + o.get("name"));
                 }
             }
         }
@@ -75,12 +73,15 @@ public class Github {
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject o = (JSONObject) jsonArray.get(i);
 
-            if (!new File(path + "/" + o.get("name")).exists()) return false;
+            if (!new File(path  + o.get("name")).exists()) {
+                System.out.println("File not exist: " + path  + o.get("name"));
+                return false;
+            }
 
             if (o.get("type").equals("dir")) {
-                Github github = new Github(this.path + "/" + o.get("name"));
+                Github github = new Github(this.path  + o.get("name"));
 
-                if (!github.isDownloaded(path + "/" + o.get("name"))) return false;
+                if (!github.isDownloaded(path  + o.get("name"))) return false;
             }
 
             System.out.println("File exist: " + o.get("url"));

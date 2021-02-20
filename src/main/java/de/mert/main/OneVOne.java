@@ -4,7 +4,6 @@ import de.mert.Commands.*;
 import de.mert.Listener.*;
 import de.mert.vars.Github;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -29,11 +28,11 @@ public class OneVOne extends JavaPlugin {
 
         // Tests if the Standard Map exists
         try {
-            Github github = new Github("Spigot/Standard_Map");
+            Github github = new Github("Spigot/Standard_Map/");
 
-            if (!github.isDownloaded("")) {
+            if (!github.isDownloaded("Standard_Map/")) {
                 new File("Standard_Map").mkdirs();
-                github.downloadFiles("Standard_Map");
+                github.downloadFiles("Standard_Map/");
             }
         } catch (IOException e) {
             e.printStackTrace();
