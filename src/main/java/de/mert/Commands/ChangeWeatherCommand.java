@@ -9,8 +9,6 @@ import org.bukkit.entity.Player;
 /*
     Changes whether you can change the weather
  */
-
-
 public class ChangeWeatherCommand implements CommandExecutor {
     public static boolean changeWeather = false;
 

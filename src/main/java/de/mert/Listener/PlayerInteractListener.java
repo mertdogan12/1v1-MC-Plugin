@@ -205,6 +205,7 @@ public class PlayerInteractListener implements Listener {
         sendToServer(p1, l1, kit);
         sendToServer(p2, l2, kit);
     }
+
     private static void sendToServer(final Player p, Location location, String kit) {
         //Teleportier die spieler und starte das Spiel
         ccs.sendMessage(kit + " | " + p.getUniqueId().toString());

@@ -118,6 +118,7 @@ public class OneVOne extends JavaPlugin {
                 ccs.sendMessage(prefix + "§cNo Connection to the Mysql Server");
                 ccs.sendMessage(prefix + "§cDisable the Ranked Mode or correct the Mysql Information");
                 ccs.sendMessage(prefix + "§cPlugin is not active");
+                ccs.sendMessage(prefix + "Error: " + e.getMessage());
                 return;
             }
         }
