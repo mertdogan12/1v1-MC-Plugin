@@ -176,13 +176,25 @@ public class MysqlPlayer {
             }
         }
 
-        if (!getName().equals(p.getName())) {
+        if (!getName()[0].equals(p.getName())) {
             try {
                 statement.executeUpdate("UPDATE name SET ign = '"+p.getName()+"' WHERE uuid = '"+p.getUniqueId().toString()+"'");
             } catch (SQLException throwables) {
                 s.sendMessage(pr+"§cError updating the name");
                 throwables.printStackTrace();
                 p.sendMessage(pr+"§cError updating the name");
+                return;
+            }
+        }
+
+        p.sendMessage(p.getUniqueId().toString() + " | " + getName()[1]);
+        if (!getName()[1].equals(p.getUniqueId().toString())) {
+            try {
+                statement.executeUpdate("UPDATE name SET uuid = '"+p.getUniqueId().toString()+"' WHERE uuid = '"+p.getName()+"'");
+            } catch (SQLException throwables) {
+                s.sendMessage(pr+"§cError updating the uuid");
+                throwables.printStackTrace();
+                p.sendMessage(pr+"§cError updating the uuid");
                 return;
             }
         }
@@ -325,14 +337,18 @@ public class MysqlPlayer {
         }
     }
 
-    private String getName() {
+    private String[] getName() {
         try {
             ResultSet result = statement.executeQuery("SELECT * FROM name WHERE uuid = '"+p.getUniqueId().toString()+"';");
             List<String> l = new ArrayList<>();
+            String[] out = new String[2];
+
             while (result.next()) {
-                l.add(result.getString("ign"));
+                out[0] = result.getString("ign");
+                out[1] = result.getString("uuid");
             }
-            return l.get(0);
+
+            return out;
         } catch (Exception ex) {
             s.sendMessage(pr+"§cNot Connected to Mysql database " +
                     "\nPlease edit the §1plugins/1v1/db.yml");
