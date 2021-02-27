@@ -10,9 +10,7 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,12 +19,11 @@ public class MysqlPlayer {
     private int port;
     private Connection connection;
     private Statement statement;
-    private ConsoleCommandSender s = Bukkit.getConsoleSender();
-    private String pr = OneVOne.prefix;
+    private final ConsoleCommandSender s = Bukkit.getConsoleSender();
+    private final String pr = OneVOne.prefix;
     public HashMap<String, Integer> elo = new HashMap<>();
     public double[] mmElo;
-    private String name;
-    private Player p;
+    private final Player p;
 
     public MysqlPlayer(Player p) {
         this.p = p;
@@ -163,7 +160,7 @@ public class MysqlPlayer {
             }
         }
 
-        if (getName() == null ) {
+       /* if (getName() == null ) {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
             java.util.Date date = new Date();
             try {
@@ -197,7 +194,7 @@ public class MysqlPlayer {
                 p.sendMessage(pr+"§cError updating the uuid");
                 return;
             }
-        }
+        }*/
 
         //Inserts the Settings
         if (!tabels.contains("player")) {
@@ -337,7 +334,7 @@ public class MysqlPlayer {
         }
     }
 
-    private String[] getName() {
+    /*private String[] getName() {
         try {
             ResultSet result = statement.executeQuery("SELECT * FROM name WHERE uuid = '"+p.getUniqueId().toString()+"';");
             List<String> l = new ArrayList<>();
@@ -354,7 +351,7 @@ public class MysqlPlayer {
                     "\nPlease edit the §1plugins/1v1/db.yml");
             return null;
         }
-    }
+    }*/
 
     public boolean openConnection() throws SQLException, ClassNotFoundException {
         if (connection != null && !connection.isClosed()) {
