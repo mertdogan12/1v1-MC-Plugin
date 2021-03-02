@@ -143,59 +143,6 @@ public class MysqlPlayer {
             }
         }
 
-
-        //Inserts the name
-        if (!tabels.contains("name")) {
-            try {
-                statement.executeUpdate("CREATE TABLE name (" +
-                        "  `uuid` VARCHAR(255) NOT NULL," +
-                        "  `ign` VARCHAR(255) NOT NULL," +
-                        "  `firstLogin` DATE NOT NULL," +
-                        "  PRIMARY KEY (`uuid`))");
-            } catch (SQLException e) {
-                p.sendMessage(pr+"§cError by creating the table name");
-                s.sendMessage(pr+"§cError by creating the table name");
-                e.printStackTrace();
-                return;
-            }
-        }
-
-       /* if (getName() == null ) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-            java.util.Date date = new Date();
-            try {
-                statement.executeUpdate("INSERT INTO name (uuid, ign, firstLogin) VALUES ('"+p.getUniqueId().toString()+"', '"+p.getName()+"', '"+formatter.format(date)+"')");
-            } catch (Exception ex1) {
-                s.sendMessage(pr+"§cError when inserting the name");
-                p.sendMessage(pr+"§cError when inserting the name");
-                ex1.printStackTrace();
-                return;
-            }
-        }
-
-        if (!getName()[0].equals(p.getName())) {
-            try {
-                statement.executeUpdate("UPDATE name SET ign = '"+p.getName()+"' WHERE uuid = '"+p.getUniqueId().toString()+"'");
-            } catch (SQLException throwables) {
-                s.sendMessage(pr+"§cError updating the name");
-                throwables.printStackTrace();
-                p.sendMessage(pr+"§cError updating the name");
-                return;
-            }
-        }
-
-        p.sendMessage(p.getUniqueId().toString() + " | " + getName()[1]);
-        if (!getName()[1].equals(p.getUniqueId().toString())) {
-            try {
-                statement.executeUpdate("UPDATE name SET uuid = '"+p.getUniqueId().toString()+"' WHERE uuid = '"+p.getName()+"'");
-            } catch (SQLException throwables) {
-                s.sendMessage(pr+"§cError updating the uuid");
-                throwables.printStackTrace();
-                p.sendMessage(pr+"§cError updating the uuid");
-                return;
-            }
-        }*/
-
         //Inserts the Settings
         if (!tabels.contains("player")) {
             try {
@@ -333,25 +280,6 @@ public class MysqlPlayer {
             return null;
         }
     }
-
-    /*private String[] getName() {
-        try {
-            ResultSet result = statement.executeQuery("SELECT * FROM name WHERE uuid = '"+p.getUniqueId().toString()+"';");
-            List<String> l = new ArrayList<>();
-            String[] out = new String[2];
-
-            while (result.next()) {
-                out[0] = result.getString("ign");
-                out[1] = result.getString("uuid");
-            }
-
-            return out;
-        } catch (Exception ex) {
-            s.sendMessage(pr+"§cNot Connected to Mysql database " +
-                    "\nPlease edit the §1plugins/1v1/db.yml");
-            return null;
-        }
-    }*/
 
     public boolean openConnection() throws SQLException, ClassNotFoundException {
         if (connection != null && !connection.isClosed()) {

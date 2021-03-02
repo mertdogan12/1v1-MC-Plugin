@@ -1,6 +1,6 @@
 main: de.mert.main.OneVOne
 name: 1v1
-version: 1.9
+version: 1.3
 author: Mert Dogan
 commands:
   tpw:
